@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -251,10 +252,15 @@ public class MainActivity extends BaseActivity {
             @Override
             protected void onResponse(BaseResponseEntity<SensorInfo> response) {
                 SensorInfo resultObj = response.getResultObj();
-                String value = resultObj.getValue();
-                LogUtil.d(TAG, "apiTagBoxAlarm value:" + value);
-                Tools.printJson(mPostResultTv, gson.toJson(resultObj));
-                displayBoxStatus(Integer.parseInt(value));
+                LogUtil.d(TAG, "Json apiTagBoxAlarm resultObj: " + gson.toJson(resultObj));
+                if (resultObj != null) {
+                    String value = resultObj.getValue();
+                    LogUtil.d(TAG, "apiTagBoxAlarm value:" + value);
+                    Tools.printJson(mPostResultTv, gson.toJson(resultObj));
+                    displayBoxStatus(Integer.parseInt(value));
+                } else {
+                    LogUtil.d(TAG, "apiTagBoxAlarm不存在，请在云平台新建！");
+                }
             }
         });
 
@@ -262,10 +268,15 @@ public class MainActivity extends BaseActivity {
             @Override
             protected void onResponse(BaseResponseEntity<SensorInfo> response) {
                 SensorInfo resultObj = response.getResultObj();
-                String value = resultObj.getValue();
-                LogUtil.d(TAG, "apiTagBoxDefenceStatus value:" + value);
-                Tools.printJson(mPostResultTv, gson.toJson(resultObj));
-                displayBoxStatus(Integer.parseInt(value));
+                LogUtil.d(TAG, "Json apiTagBoxDefenceStatus resultObj: " + gson.toJson(resultObj));
+                if (resultObj != null) {
+                    String value = resultObj.getValue();
+                    LogUtil.d(TAG, "apiTagBoxDefenceStatus value:" + value);
+                    Tools.printJson(mPostResultTv, gson.toJson(resultObj));
+                    displayBoxStatus(Integer.parseInt(value));
+                } else {
+                    LogUtil.d(TAG, "apiTagBoxDefenceStatus不存在，请在云平台新建！");
+                }
             }
         });
 
